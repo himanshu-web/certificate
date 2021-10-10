@@ -18,20 +18,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/record', [App\Http\Controllers\Admin\AdminController::class, 'record'])->name('home');
 Route::get('/record', [App\Http\Controllers\Admin\AdminController::class, 'record'])->name('record');
 Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
-Route::post('/show', [App\Http\Controllers\Admin\AdminController::class, 'show_certificate'])->name('show');
+Route::post('/show/{id}', [App\Http\Controllers\Admin\AdminController::class, 'show_certificate'])->name('show');
+Route::post('/destroy/{id}', [App\Http\Controllers\Admin\AdminController::class, 'destroy'])->name('destroy');
 Route::post('/importRecord',[App\Http\Controllers\Admin\AdminController::class, 'importRecord'])->name('importRecord');
-
-Route::get('/pdf_gen',[App\Http\Controllers\HomeController::class,'pdfGen'])->name('pdfGen');
-
-Route::get('/show/pdf',function (){
-	$data = \App\Models\Record::where('id',10)->first();
-	// return $data;
-	// $pdf = PDF::loadView('Admin.Header.generate',$data);
-	// return $pdf->download('invoice.pdf');
-    return view('Admin.Header.generate',$data);
-});
+Route::get('/pdf_gen/{id}',[App\Http\Controllers\HomeController::class,'pdfGen'])->name('pdfGen');

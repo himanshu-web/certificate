@@ -25,15 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-         $data =Record::orderBy('id', 'desc')->get();
+        $data =Record::orderBy('id', 'desc')->get();
         return view('home',compact('data'));
     }
-    public function pdfGen(){
-        
-        $data = Record::where('id',10)->first();
-        dd($data);
-        $pdf = PDF::loadView('Admin.Header.generate1',$data);
-        // dd($pdf);
+    public function pdfGen($id)
+    {
+        $data = Record::where('id',$id)->first();
+        $pdf = PDF::loadView('Admin.Header.generate',$data)->setPaper('a4', 'landscape');
+        $name=$data->name_of_offician;
+        $mob=$data->mobile;
         return $pdf->download('invoice.pdf');
     }
 }

@@ -65,7 +65,7 @@
                               <td>{{$value->digital_certificate_no}}</td>
                               <td>{{$value->date}}</td>
                               <td>
-                                <form action="{{route('show')}}" method="post">
+                                <form action="{{route('show',$value->id)}}" method="post">
                                   @csrf
                                   <input type="hidden" name="id" value="{{$value->id}}">
                                   <button class="btn btn-success btn-sm" type="submit">View</button>
